@@ -1,4 +1,4 @@
-package com.example.techere;
+package com.springboot.techere;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
