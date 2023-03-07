@@ -1,4 +1,4 @@
-package com.springboot.techere.global.config;
+package com.example.techere.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
