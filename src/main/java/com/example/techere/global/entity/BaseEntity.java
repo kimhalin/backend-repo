@@ -1,4 +1,4 @@
-package com.springboot.techere.global.entity;
+package com.example.techere.global.entity;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;

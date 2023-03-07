@@ -1,6 +1,6 @@
-package com.springboot.techere.global.error.exception;
+package com.example.techere.global.error.exception;
 
-import com.springboot.techere.global.error.ErrorCode;
+import com.example.techere.global.error.ErrorCode;
 
 public class ExampleException extends BusinessException {
   public ExampleException() {

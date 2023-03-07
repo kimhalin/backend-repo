@@ -1,8 +1,8 @@
-package com.springboot.techere.global.error;
+package com.example.techere.global.error;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-import com.springboot.techere.global.error.exception.BusinessException;
+import com.example.techere.global.error.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

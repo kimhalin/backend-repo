@@ -1,4 +1,4 @@
-package com.springboot.techere;
+package com.example.techere;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

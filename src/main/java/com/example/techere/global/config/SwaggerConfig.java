@@ -1,4 +1,4 @@
-package com.springboot.techere.global.config;
+package com.example.techere.global.config;
 
 import java.util.HashSet;
 import java.util.Set;

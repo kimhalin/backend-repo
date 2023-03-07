@@ -1,4 +1,4 @@
-package com.springboot.techere.global.result;
+package com.example.techere.global.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

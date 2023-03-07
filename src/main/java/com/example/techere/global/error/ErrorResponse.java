@@ -1,4 +1,4 @@
-package com.springboot.techere.global.error;
+package com.example.techere.global.error;
 
 import java.util.ArrayList;
 import java.util.List;

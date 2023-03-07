@@ -1,4 +1,4 @@
-package com.springboot.techere.global.error;
+package com.example.techere.global.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
