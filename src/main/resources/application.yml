@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: docker
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
