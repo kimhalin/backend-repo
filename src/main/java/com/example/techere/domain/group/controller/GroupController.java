@@ -17,13 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class GroupController {
 
-    @PostMapping
+    @PostMapping("/{isValid}")
     public ResponseEntity<ResultResponse> create(@PathVariable int isValid) {
 
-        // Validation 처리
         if (isValid == 0) {
-            // Validation을 통과하지 못할 경우 Exception을 반환
-            // exception occurs
             throw new BusinessException(ErrorCode.INPUT_INVALID_VALUE, "Reason why it isn't valid");
         }
 
