@@ -14,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("api/v1/files")
 public class FileController {
 
-    private final FileService fileService;
+  private final FileService fileService;
 
-    @PostMapping()
-    public ResponseEntity<List<String>> uploadFile(List<MultipartFile> multipartFiles){
-        return ResponseEntity.ok(fileService.uploadFile(multipartFiles));
-    }
+  @PostMapping()
+  public ResponseEntity<List<String>> uploadFile(List<MultipartFile> multipartFiles) {
+    return ResponseEntity.ok(fileService.uploadFile(multipartFiles));
+  }
 }
