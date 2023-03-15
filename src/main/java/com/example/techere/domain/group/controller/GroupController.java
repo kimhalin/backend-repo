@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class GroupController {
 
-    @PostMapping("/{isValid}")
-    public ResponseEntity<ResultResponse> create(@PathVariable int isValid) {
+  @PostMapping("/{isValid}")
+  public ResponseEntity<ResultResponse> create(@PathVariable int isValid) {
 
-        if (isValid == 0) {
-            throw new BusinessException(ErrorCode.INPUT_INVALID_VALUE, "Reason why it isn't valid");
-        }
-
-        return ResponseEntity.ok(ResultResponse.of(ResultCode.GROUP_CREATE_SUCCESS));
+    if (isValid == 0) {
+      throw new BusinessException(ErrorCode.INPUT_INVALID_VALUE, "Reason why it isn't valid");
     }
+
+    return ResponseEntity.ok(ResultResponse.of(ResultCode.GROUP_CREATE_SUCCESS));
+  }
 }
