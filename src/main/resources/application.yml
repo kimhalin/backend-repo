@@ -21,14 +21,13 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
 
-
 cloud:
   aws:
     credentials:
-      accessKey: ${ACCESS_KEY}
-      secretKey: ${SECRET_KEY}
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
     s3:
-      bucket: techere
+      bucket: ${BUCKET_NAME}
     region:
       static: ap-northeast-2
     stack:
