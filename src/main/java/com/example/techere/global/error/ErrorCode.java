@@ -1,11 +1,10 @@
 package com.example.techere.global.error;
 
+import java.util.Optional;
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 /** {주체}_{이유} message 는 동사 명사형으로 마무리 */
 @Getter
@@ -31,13 +30,12 @@ public enum ErrorCode {
 
   public String getMessage(String message) {
     return Optional.ofNullable(message)
-            .filter(Predicate.not(String::isBlank))
-            .orElse(this.getMessage());
+        .filter(Predicate.not(String::isBlank))
+        .orElse(this.getMessage());
   }
 
   @Override
   public String toString() {
     return String.format("%s (%d)", this.name(), this.getCode());
   }
-
 }

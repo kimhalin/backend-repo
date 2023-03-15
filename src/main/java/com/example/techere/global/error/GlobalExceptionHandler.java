@@ -31,22 +31,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return handleExceptionInternal(e, ErrorCode.INTERNAL_SERVER_ERROR, request);
   }
 
-
-  private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorCode errorCode,
-                                                         WebRequest request) {
+  private ResponseEntity<Object> handleExceptionInternal(
+      Exception e, ErrorCode errorCode, WebRequest request) {
     log.error(e.getMessage(), e);
-    return handleExceptionInternal(e, errorCode, errorCode.getStatus(),
-            request);
+    return handleExceptionInternal(e, errorCode, errorCode.getStatus(), request);
   }
 
-  private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorCode errorCode,
-                                                         HttpStatus status, WebRequest request) {
+  private ResponseEntity<Object> handleExceptionInternal(
+      Exception e, ErrorCode errorCode, HttpStatus status, WebRequest request) {
     return super.handleExceptionInternal(
-            e,
-            ErrorResponse.of(errorCode),
-            HttpHeaders.EMPTY,
-            status,
-            request
-    );
+        e, ErrorResponse.of(errorCode), HttpHeaders.EMPTY, status, request);
   }
 }
