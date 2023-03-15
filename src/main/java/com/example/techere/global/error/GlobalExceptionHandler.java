@@ -1,44 +1,52 @@
 package com.example.techere.global.error;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-
 import com.example.techere.global.error.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @Slf4j
-@RestControllerAdvice
-public class GlobalExceptionHandler {
+@RestControllerAdvice(annotations = {RestController.class})
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(Exception.class)
-  protected ResponseEntity<ErrorResponse> handleException(Exception e) {
+  @ExceptionHandler
+  public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+    return handleExceptionInternal(e, ErrorCode.INPUT_INVALID_VALUE, request);
+  }
+
+  @ExceptionHandler
+  public ResponseEntity<Object> business(BusinessException e, WebRequest request) {
+    return handleExceptionInternal(e, e.getErrorCode(), request);
+  }
+
+  @ExceptionHandler
+  public ResponseEntity<Object> exception(Exception e, WebRequest request) {
+    return handleExceptionInternal(e, ErrorCode.INTERNAL_SERVER_ERROR, request);
+  }
+
+
+  private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorCode errorCode,
+                                                         WebRequest request) {
     log.error(e.getMessage(), e);
-    ErrorResponse response = ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR);
-    return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    return handleExceptionInternal(e, errorCode, errorCode.getStatus(),
+            request);
   }
 
-  @ExceptionHandler
-  protected ResponseEntity<ErrorResponse> handleRuntimeException(BusinessException e) {
-    final ErrorCode errorCode = e.getErrorCode();
-    final ErrorResponse response =
-        ErrorResponse.builder()
-            .errorMessage(errorCode.getMessage())
-            .businessCode(errorCode.getCode())
-            .build();
-    log.warn(e.getMessage());
-    return ResponseEntity.status(errorCode.getStatus()).body(response);
-  }
-
-  @ExceptionHandler
-  protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
-      MethodArgumentNotValidException e) {
-    final ErrorResponse response =
-        ErrorResponse.of(ErrorCode.INPUT_INVALID_VALUE, e.getBindingResult());
-    log.warn(e.getMessage());
-    return new ResponseEntity<>(response, BAD_REQUEST);
+  private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorCode errorCode,
+                                                         HttpStatus status, WebRequest request) {
+    return super.handleExceptionInternal(
+            e,
+            ErrorResponse.of(errorCode),
+            HttpHeaders.EMPTY,
+            status,
+            request
+    );
   }
 }
